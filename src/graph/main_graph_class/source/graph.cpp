@@ -7,17 +7,21 @@ void Graph::add_vertex(const std::string& vert_name) noexcept {
     vertices_[vert_name] = new_vertex;
 }
 
-void Graph::add_edge(size_t weight, const std::string& source_id, const std::string& dest_id) {
+std::string Graph::add_edge(size_t weight, const std::string& source_id, const std::string& dest_id) noexcept {
     auto source_iter = vertices_.find(source_id);
     auto dest_iter = vertices_.find(dest_id);
+    if (dest_iter == vertices_.end() && source_iter == vertices_.end()) {
+        return "Unknown nodes " + source_id + " " + dest_id;
+    }
     if (source_iter == vertices_.end()) {
-        throw std::invalid_argument("Source vertex not found");
+        return "Unknown node " + source_id;
     }
     if (dest_iter == vertices_.end()) {
-        throw std::invalid_argument("Dest vertex not found");
+        return "Unknown node " + dest_id;
     }
     source_iter->second.add_outgoing_edge(&dest_iter->second, weight);
     dest_iter->second.add_incoming_edge(&source_iter->second, weight);
+    return "Success";
 }
 
 const Vertex& Graph::get_vertex(const std::string& vert_name) const {
@@ -36,30 +40,35 @@ const Edge& Graph::get_edge(const std::string& source_id, const std::string& des
     return iter->second.get_outgoing_edge(dest_id);
 }
 
-void Graph::delete_edge(const std::string& source_id, const std::string& dest_id) {
+std::string Graph::delete_edge(const std::string& source_id, const std::string& dest_id) {
     auto source_iter = vertices_.find(source_id);
     auto dest_iter = vertices_.find(dest_id);
+    if (dest_iter == vertices_.end() && source_iter == vertices_.end()) {
+        return "Unknown nodes " + source_id + " " + dest_id;
+    }
     if (source_iter == vertices_.end()) {
-        throw std::invalid_argument("Source vertex not found");
+        return "Unknown node " + source_id;
     }
     if (dest_iter == vertices_.end()) {
-        throw std::invalid_argument("Dest vertex not found");
+        return "Unknown node " + dest_id;
     }
     source_iter->second.delete_incoming_edge(dest_id);
     dest_iter->second.delete_incoming_edge(source_id);
+    return "Success";
 }
 
 
-void Graph::delete_vertex(const std::string& vert_name) {
+std::string Graph::delete_vertex(const std::string& vert_name) {
     auto iter = vertices_.find(vert_name);
     if (iter == vertices_.end()) {
-        throw std::invalid_argument("Vertex not found");
+        return "Unknown node " + vert_name;
     }
     for (auto& element : vertices_) {
         element.second.delete_outgoing_edge(vert_name);
         element.second.delete_incoming_edge(vert_name);
     }
     vertices_.erase(vert_name);
+    return "Success";
 }
 
 

@@ -5,13 +5,16 @@ project('1_graphs', 'cpp',
 subdir('src/view')
 subdir('src/controller')
 subdir('src/graph')
-
+subdir('src/commands')
 
 _1_graphs = executable('_1_graphs',
                        'main.cpp',
-                        dependencies : [view_dep,
-                                        controller_dep,
-                                        all_graph_deps],
+                        dependencies : [
+                            view_dep,
+                            controller_dep,
+                            all_graph_deps,
+                            command_deps
+                        ],
                         install : true)
 
 test('test', _1_graphs)
