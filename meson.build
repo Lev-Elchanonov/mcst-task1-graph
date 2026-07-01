@@ -11,7 +11,7 @@ _1_graphs = executable('_1_graphs',
                        'main.cpp',
                         dependencies : [view_dep,
                                         controller_dep,
-                                        graph_dep],
+                                        all_graph_deps],
                         install : true)
 
 test('test', _1_graphs)
