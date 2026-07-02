@@ -10,7 +10,7 @@
 #include "remove_edge_cmd.hpp"
 #include "remove_vertex_cmd.hpp"
 #include "visualize_cmd.hpp"
-
+#include "dijkstra_cmd.hpp"
 
 std::vector<std::string> Controller::split_tokens(std::string str) {
     std::regex reg(R"(\s+)");
@@ -27,6 +27,7 @@ void Controller::register_default_commands() {
     commands_.emplace("REMOVE NODE", std::make_unique<remove_vertex_cmd>());
     commands_.emplace("REMOVE EDGE", std::make_unique<remove_edge_cmd>());
     commands_.emplace("LOOK", std::make_unique<visualize_cmd>());
+    commands_.emplace("DIJKSTRA", std::make_unique<dijkstra_cmd>());
 }
 
 
