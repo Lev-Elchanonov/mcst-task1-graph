@@ -9,6 +9,7 @@
 #include "add_vertex_cmd.hpp"
 #include "remove_edge_cmd.hpp"
 #include "remove_vertex_cmd.hpp"
+#include "visualize_cmd.hpp"
 
 
 std::vector<std::string> Controller::split_tokens(std::string str) {
@@ -25,6 +26,7 @@ void Controller::register_default_commands() {
     commands_.emplace("EDGE", std::make_unique<add_edge_cmd>());
     commands_.emplace("REMOVE NODE", std::make_unique<remove_vertex_cmd>());
     commands_.emplace("REMOVE EDGE", std::make_unique<remove_edge_cmd>());
+    commands_.emplace("LOOK", std::make_unique<visualize_cmd>());
 }
 
 
@@ -45,7 +47,7 @@ void Controller::delete_command(const std::string& command) {
 
 
 
-Output_msg Controller::process_command(const std::string &command) {
+std::string Controller::process_command(const std::string &command) {
     std::vector<std::string> tokens = split_tokens(command);
     std::string command_name = tokens.front();
     tokens.erase(tokens.begin());
@@ -55,8 +57,8 @@ Output_msg Controller::process_command(const std::string &command) {
     }
     auto cmd = commands_.find(command_name);
     if (cmd == commands_.end()) {
-        return {false, ""};
+        return  "";
     }
-    return {true, cmd->second->execute(*graph_, tokens)};
+    return cmd->second->execute(*graph_, tokens);
 }
 

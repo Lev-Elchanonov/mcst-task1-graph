@@ -15,7 +15,7 @@ class Controller {
         void register_default_commands();
     public:
         explicit Controller(Graph* graph);
-        Output_msg process_command(const std::string& command);
+        std::string process_command(const std::string& command);
 
         void add_command(const std::string& command, std::unique_ptr<i_command> command_ptr);
         void delete_command(const std::string& command);

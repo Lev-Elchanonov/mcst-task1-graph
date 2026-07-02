@@ -7,11 +7,9 @@ void View::chat(std::istream& istr) {
     std::string message;
     while (std::getline(istr, input)) {
         if (input == "exit") { break; }
-        Output_msg operation_result = controller_.process_command(input);
-        if (operation_result.get_result() == true && operation_result.get_msg() != "Success") {
-            std::cout << operation_result.get_msg() << std::endl;
-        } else if (operation_result.get_result() == false) {
-            std::cout << "\tError: Unknown command" << std::endl;
+        std::string res_msg = controller_.process_command(input);
+        if (!res_msg.empty()) {
+            std::cout << res_msg << std::endl;
         }
     }
 }

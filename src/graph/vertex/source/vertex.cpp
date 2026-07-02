@@ -20,6 +20,8 @@ const Edge& Vertex::get_outgoing_edge(const std::string &id) const{
 
 void Vertex::add_incoming_edge(Vertex* other_vertex, size_t weight) noexcept {
     if (!other_vertex) { return; }
+    if (outgoing_edges_.find(other_vertex->id_) != outgoing_edges_.end()) { return; } // уже существует ребро между вершинами
+
     const std::string& id = other_vertex->get_id();
     const auto iter = incoming_edges_.find(id);
     if (iter != incoming_edges_.end()) { return; }
@@ -30,6 +32,8 @@ void Vertex::add_incoming_edge(Vertex* other_vertex, size_t weight) noexcept {
 
 void Vertex::add_outgoing_edge(Vertex* other_vertex, size_t weight) noexcept {
     if (!other_vertex) { return; }
+    if (incoming_edges_.find(other_vertex->id_) != incoming_edges_.end()) { return; }
+
     const std::string& id = other_vertex->get_id();
     const auto iter = outgoing_edges_.find(id);
     if (iter != outgoing_edges_.end()) { return; }

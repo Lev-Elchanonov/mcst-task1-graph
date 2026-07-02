@@ -24,5 +24,8 @@ class Vertex {
 
         void delete_incoming_edge(const std::string& id) noexcept;
         void delete_outgoing_edge(const std::string& id) noexcept;
+
+        [[nodiscard]] std::map<std::string, Edge> get_incoming_edges() const noexcept { return incoming_edges_; }
+        [[nodiscard]] std::map<std::string, Edge> get_outgoing_edges() const noexcept { return outgoing_edges_; }
 };
 

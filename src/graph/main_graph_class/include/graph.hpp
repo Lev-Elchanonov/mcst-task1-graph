@@ -16,4 +16,6 @@ class Graph {
 
         std::string delete_vertex(const std::string& vert_name);
         std::string delete_edge(const std::string& source_id, const std::string& dest_id);
+
+        std::string export_to_dot() const; // для визуализации графа
 };
