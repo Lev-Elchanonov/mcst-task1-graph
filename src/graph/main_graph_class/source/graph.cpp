@@ -95,4 +95,3 @@ std::string Graph::export_to_dot() const {
     result += "}\n";
     return result;
 }
-

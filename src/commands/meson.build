@@ -5,6 +5,8 @@ subdir('remove_edge_cmd')
 subdir('remove_vertex_cmd')
 subdir('visualize_cmd')
 subdir('dijkstra_cmd')
+subdir('maxflow_cmd')
+
 
 command_deps = declare_dependency(
     dependencies : [
@@ -14,6 +16,7 @@ command_deps = declare_dependency(
         remove_edge_dep,
         remove_vert_dep,
         visualize_dep,
-        dijkstra_dep
+        dijkstra_dep,
+        maxflow_dep
     ]
 )

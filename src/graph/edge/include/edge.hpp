@@ -5,7 +5,7 @@ class Vertex;
 
 class Edge {
     private:
-        std::size_t weight_;
+        size_t weight_;
         Vertex* source_;
         Vertex* dest_;
     public:
@@ -15,4 +15,5 @@ class Edge {
         [[nodiscard]] const Vertex& get_dest() const noexcept;
 
         void set_weight(size_t new_weight) noexcept;
+
 };
