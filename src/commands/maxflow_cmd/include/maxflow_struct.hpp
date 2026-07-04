@@ -57,6 +57,9 @@ class Maxflow {
             }
         }
         size_t find_maxflow(const std::string& start) {
+            if (start == dest_vertex_) {
+                return INT_MAX;
+            }
             size_t total_flow = 0;
 
             while (true) {
