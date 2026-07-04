@@ -20,4 +20,5 @@ public:
     std::unordered_map<std::string, Vertex> get_vertices() const noexcept { return vertices_; }
     std::string export_to_dot() const; // для визуализации графа
 
+    void clear() noexcept { vertices_.clear(); }
 };

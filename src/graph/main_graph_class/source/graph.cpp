@@ -20,7 +20,6 @@ std::string Graph::add_edge(size_t weight, const std::string& source_id, const s
         return "Unknown node " + dest_id;
     }
     source_iter->second.add_outgoing_edge(&dest_iter->second, weight);
-    //dest_iter->second.add_incoming_edge(&source_iter->second, weight);
     return "";
 }
 
@@ -54,7 +53,6 @@ std::string Graph::delete_edge(const std::string& source_id, const std::string& 
     }
 
     source_iter->second.delete_outgoing_edge(dest_id);
-    //dest_iter->second.delete_incoming_edge(source_id);
     return "";
 }
 
@@ -66,7 +64,6 @@ std::string Graph::delete_vertex(const std::string& vert_name) {
     }
     for (auto& element : vertices_) {
         element.second.delete_outgoing_edge(vert_name);
-        //element.second.delete_incoming_edge(vert_name);
     }
     vertices_.erase(vert_name);
     return "";
