@@ -4,7 +4,6 @@
 
 #include "graph.hpp"
 #include "i_command.hpp"
-#include "output_msg.hpp"
 
 class Controller {
     private:

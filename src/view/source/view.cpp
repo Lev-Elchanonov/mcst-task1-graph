@@ -1,5 +1,4 @@
 #include "view.hpp"
-#include "output_msg.hpp"
 
 
 void View::chat(std::istream& istr) {
