@@ -6,6 +6,7 @@ subdir('remove_vertex_cmd')
 subdir('visualize_cmd')
 subdir('dijkstra_cmd')
 subdir('maxflow_cmd')
+subdir('tarjan_cmd')
 
 
 command_deps = declare_dependency(
@@ -17,6 +18,7 @@ command_deps = declare_dependency(
         remove_vert_dep,
         visualize_dep,
         dijkstra_dep,
-        maxflow_dep
+        maxflow_dep,
+        tarjan_dep
     ]
 )

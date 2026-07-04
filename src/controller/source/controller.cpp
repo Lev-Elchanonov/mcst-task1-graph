@@ -12,6 +12,7 @@
 #include "visualize_cmd.hpp"
 #include "dijkstra_cmd.hpp"
 #include "maxflow_cmd.hpp"
+#include "src/commands/tarjan_cmd/include/tarjan_cmd.hpp"
 
 std::vector<std::string> Controller::split_tokens(std::string str) {
     std::regex reg(R"(\s+)");
@@ -30,6 +31,7 @@ void Controller::register_default_commands() {
     commands_.emplace("LOOK", std::make_unique<visualize_cmd>());
     commands_.emplace("DIJKSTRA", std::make_unique<dijkstra_cmd>());
     commands_.emplace("MAXFLOW", std::make_unique<maxflow_cmd>());
+    commands_.emplace("TARJAN", std::make_unique<tarjan_cmd>());
 }
 
 
