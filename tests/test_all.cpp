@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include "dijkstra_cmd.hpp"
 #include "graph.hpp"
 
 class Graph_test : public ::testing::Test {
@@ -92,6 +93,43 @@ TEST_F(Graph_test, Remove_edge) {
 
     EXPECT_NO_THROW(graph_.delete_edge("NON_EXIST_1", "NON_EXIST_2"));
 }
+
+TEST_F(Graph_test, Dijkstra) {
+    graph_.add_vertex("F");
+    graph_.add_edge(100, "A", "F");
+    graph_.add_edge(13, "B", "E");
+    graph_.add_edge(4, "E", "F");
+
+    std::unique_ptr<dijkstra_cmd> dijkstra = std::make_unique<dijkstra_cmd>();
+    auto res = dijkstra->execute(graph_, {"A"});
+    EXPECT_EQ(res, "C 3\nD 4\nB 5\nE 7\nF 11");
+
+    graph_.delete_edge("E", "F");
+    res = dijkstra->execute(graph_, {"A"});
+    EXPECT_EQ(res, "C 3\nD 4\nB 5\nE 7\nF 100");
+
+    graph_.delete_vertex("E");
+    res = dijkstra->execute(graph_, {"A"});
+    EXPECT_EQ(res, "C 3\nD 4\nB 5\nF 100");
+
+
+    graph_.clear();
+    graph_.add_vertex("A");
+    graph_.add_vertex("B");
+    graph_.add_vertex("C");
+    graph_.add_vertex("D");
+    graph_.add_edge(10, "A", "B");
+    graph_.add_edge(10, "B", "C");
+    graph_.add_edge(10, "C", "D");
+
+    graph_.add_vertex("ALONE");
+    res = dijkstra->execute(graph_, {"A"});
+    EXPECT_EQ(res, "B 10\nC 20\nD 30");
+
+    res = dijkstra->execute(graph_, {"ALONE"});
+    EXPECT_TRUE(res.empty());
+}
+
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
