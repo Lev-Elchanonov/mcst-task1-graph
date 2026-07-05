@@ -38,7 +38,7 @@ const Edge& Graph::get_edge(const std::string& source_id, const std::string& des
     return iter->second.get_outgoing_edge(dest_id);
 }
 
-std::string Graph::delete_edge(const std::string& source_id, const std::string& dest_id) {
+std::string Graph::delete_edge(const std::string& source_id, const std::string& dest_id) noexcept {
     if (!vertices_.contains(source_id) && !vertices_.contains(dest_id)) {
         return "Unknown nodes " + source_id + " " + dest_id;
     }
@@ -54,7 +54,7 @@ std::string Graph::delete_edge(const std::string& source_id, const std::string& 
 }
 
 
-std::string Graph::delete_vertex(const std::string& vert_name) {
+std::string Graph::delete_vertex(const std::string& vert_name) noexcept {
     if (!vertices_.contains(vert_name)) {
         return "Unknown node " + vert_name;
     }
@@ -66,7 +66,7 @@ std::string Graph::delete_vertex(const std::string& vert_name) {
 }
 
 
-std::string Graph::export_to_dot() const {
+std::string Graph::export_to_dot() const noexcept {
     std::string result = "digraph G {\n";
     result += "    rankdir=LR;\n";
     result += "    node [shape=circle];\n";

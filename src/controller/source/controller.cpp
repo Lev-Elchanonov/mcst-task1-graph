@@ -55,17 +55,17 @@ void Controller::delete_command(const std::string& command) {
 
 
 std::string Controller::process_command(const std::string &command) {
-    std::vector<std::string> tokens = split_tokens(command);
+    std::vector<std::string> tokens = split_tokens(command);        // первый полученный токен - название команды, остальные - ее аргументы
     std::string command_name = tokens.front();
     tokens.erase(tokens.begin());
-    if (command_name == "REMOVE") {
+    if (command_name == "REMOVE") { // для REMOVE в имя команды входят первые 2 токена (REMOVE NODE, REMOVE EDGE)
         command_name += " " + tokens.front();
         tokens.erase(tokens.begin());
     }
-    auto cmd = commands_.find(command_name);
+    auto cmd = commands_.find(command_name); // поиск команды в хеш-мапе
     if (cmd == commands_.end()) {
         return  "";
     }
-    return cmd->second->execute(*graph_, tokens);
+    return cmd->second->execute(*graph_, tokens); // вызов override метода в наследнике, реализующем конкретную команду
 }
 
