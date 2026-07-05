@@ -2,6 +2,7 @@
 
 #include "dijkstra_cmd.hpp"
 #include "graph.hpp"
+#include "maxflow_cmd.hpp"
 
 class Graph_test : public ::testing::Test {
     protected:
@@ -130,6 +131,50 @@ TEST_F(Graph_test, Dijkstra) {
     EXPECT_TRUE(res.empty());
 }
 
+
+TEST_F(Graph_test, Maxflow) {
+    graph_.clear();
+    graph_.add_vertex("A");
+    graph_.add_vertex("B");
+    graph_.add_vertex("C");
+    graph_.add_vertex("D");
+    graph_.add_vertex("E");
+    graph_.add_vertex("F");
+
+    graph_.add_edge(7, "A", "B");
+    graph_.add_edge(4, "A", "C");
+    graph_.add_edge(4, "B", "C");
+    graph_.add_edge(2, "B", "E");
+    graph_.add_edge(8, "C", "E");
+    graph_.add_edge(4, "C", "D");
+    graph_.add_edge(4, "E", "D");
+    graph_.add_edge(5, "E", "F");
+    graph_.add_edge(12, "D", "F");
+
+    auto maxflow = std::make_unique<maxflow_cmd>();
+    auto res = maxflow->execute(graph_, {"A", "F"});
+    EXPECT_EQ(res, "10");
+
+    //////////////////////////////////////////////////////
+    graph_.clear();
+    graph_.add_vertex("A");
+    graph_.add_vertex("B");
+    graph_.add_vertex("C");
+    graph_.add_vertex("D");
+    graph_.add_vertex("E");
+
+    graph_.add_edge(30, "A", "B");
+    graph_.add_edge(40, "A", "C");
+    graph_.add_edge(20, "A", "D");
+    graph_.add_edge(50, "B", "C");
+    graph_.add_edge(40, "B", "E");
+    graph_.add_edge(20, "C", "D");
+    graph_.add_edge(30, "C", "E");
+    graph_.add_edge(30, "D", "E");
+    res = maxflow->execute(graph_, {"A", "E"});
+    EXPECT_EQ(res, "90");
+
+}
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
