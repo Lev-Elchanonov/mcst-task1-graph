@@ -34,7 +34,7 @@ TEST_F(Vertex_test, Remove_vertex) {
     EXPECT_NO_THROW(graph_.get_vertex("D"));
     EXPECT_NO_THROW(graph_.get_vertex("B").get_outgoing_edge("D"));
     EXPECT_NO_THROW(graph_.get_vertex("C").get_outgoing_edge("D"));
-
+    EXPECT_EQ(graph_.delete_vertex("NONE"), "Unknown node NONE");
     graph_.delete_vertex("D");
 
     EXPECT_THROW(graph_.get_vertex("B").get_outgoing_edge("D"),std::out_of_range);

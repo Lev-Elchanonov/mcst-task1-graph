@@ -8,8 +8,8 @@
 
 class Vertex {
     private:
-        std::string id_;
-        std::map<std::string, Edge> outgoing_edges_;
+        std::string id_;                                // идентификатор вершины
+        std::map<std::string, Edge> outgoing_edges_;    // выходящие из вершины ребра
     public:
         explicit Vertex(std::string id) : id_(std::move(id)) {}
         Vertex() = default;

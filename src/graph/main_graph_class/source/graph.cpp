@@ -8,58 +8,54 @@ void Graph::add_vertex(const std::string& vert_name) noexcept {
 }
 
 std::string Graph::add_edge(size_t weight, const std::string& source_id, const std::string& dest_id) noexcept {
-    auto source_iter = vertices_.find(source_id);
-    auto dest_iter = vertices_.find(dest_id);
-    if (dest_iter == vertices_.end() && source_iter == vertices_.end()) {
+    if (!vertices_.contains(source_id) && !vertices_.contains(dest_id)) {
         return "Unknown nodes " + source_id + " " + dest_id;
     }
-    if (source_iter == vertices_.end()) {
+    if (!vertices_.contains(source_id)) {
         return "Unknown node " + source_id;
     }
-    if (dest_iter == vertices_.end()) {
+    if (!vertices_.contains(dest_id)) {
         return "Unknown node " + dest_id;
     }
-    source_iter->second.add_outgoing_edge(&dest_iter->second, weight);
+    auto source_iter = vertices_.find(source_id);
+    auto dest_iter = vertices_.find(dest_id);
+    source_iter->second.add_outgoing_edge(&dest_iter->second, weight); // добавление ребра source_id -> dest_id
     return "";
 }
 
 const Vertex& Graph::get_vertex(const std::string& vert_name) const {
-    auto iter = vertices_.find(vert_name);
-    if (iter == vertices_.end()) {
+    if (!vertices_.contains(vert_name)) {
         throw std::invalid_argument("Vertex not found");
     }
-    return iter->second;
+    return vertices_.find(vert_name)->second;
 }
 
 const Edge& Graph::get_edge(const std::string& source_id, const std::string& dest_id) const {
-    auto iter = vertices_.find(source_id);
-    if (iter == vertices_.end()) {
+    if (!vertices_.contains(source_id)) {
         throw std::invalid_argument("Source vertex not found");
     }
+    auto iter = vertices_.find(source_id);
     return iter->second.get_outgoing_edge(dest_id);
 }
 
 std::string Graph::delete_edge(const std::string& source_id, const std::string& dest_id) {
-    auto source_iter = vertices_.find(source_id);
-    auto dest_iter = vertices_.find(dest_id);
-    if (dest_iter == vertices_.end() && source_iter == vertices_.end()) {
+    if (!vertices_.contains(source_id) && !vertices_.contains(dest_id)) {
         return "Unknown nodes " + source_id + " " + dest_id;
     }
-    if (source_iter == vertices_.end()) {
+    if (!vertices_.contains(source_id)) {
         return "Unknown node " + source_id;
     }
-    if (dest_iter == vertices_.end()) {
+    if (!vertices_.contains(dest_id)) {
         return "Unknown node " + dest_id;
     }
-
+    auto source_iter = vertices_.find(source_id);
     source_iter->second.delete_outgoing_edge(dest_id);
     return "";
 }
 
 
 std::string Graph::delete_vertex(const std::string& vert_name) {
-    auto iter = vertices_.find(vert_name);
-    if (iter == vertices_.end()) {
+    if (!vertices_.contains(vert_name)) {
         return "Unknown node " + vert_name;
     }
     for (auto& element : vertices_) {

@@ -6,7 +6,7 @@
 
 class Graph {
 private:
-    std::unordered_map<std::string, Vertex> vertices_;
+    std::unordered_map<std::string, Vertex> vertices_;      // хеш-мапа вершин
 public:
     void add_vertex(const std::string& vert_name) noexcept;
     std::string add_edge(size_t weight, const std::string& source_id, const std::string& dest_id) noexcept;
@@ -20,5 +20,5 @@ public:
     std::unordered_map<std::string, Vertex> get_vertices() const noexcept { return vertices_; }
     std::string export_to_dot() const; // для визуализации графа
 
-    void clear() noexcept { vertices_.clear(); }
+    void clear() noexcept { vertices_.clear(); } // полная очистка графа
 };

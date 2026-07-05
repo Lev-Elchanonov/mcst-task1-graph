@@ -5,9 +5,9 @@ class Vertex;
 
 class Edge {
     private:
-        size_t weight_;
-        Vertex* source_;
-        Vertex* dest_;
+        size_t weight_;     // вес ребра
+        Vertex* source_;    // исток
+        Vertex* dest_;      // сток
     public:
         explicit Edge(size_t weight, Vertex* source, Vertex* dest);
         [[nodiscard]] size_t get_weight() const noexcept;
