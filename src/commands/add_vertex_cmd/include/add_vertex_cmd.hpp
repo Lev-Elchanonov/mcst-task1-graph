@@ -13,9 +13,7 @@ class add_vertex_cmd : public i_command {
 
 
         bool validate_args(const std::vector<std::string> &args) override {
-            if (args.size() != 1 || std::isdigit(args[0].front())) {
-                return false;
-            }
-            return true;
+            bool broken_arguments = args.size() != 1 || std::isdigit(args[0].front());
+            return !broken_arguments;
         }
 };

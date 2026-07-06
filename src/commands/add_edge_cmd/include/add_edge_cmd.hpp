@@ -14,7 +14,6 @@ class add_edge_cmd : public i_command {
         static bool is_number(const std::string& s) {
             if (s.empty())
                 return false;
-
             for (char c : s) {
                 if (!std::isdigit(c)) {
                     return false;
@@ -23,10 +22,7 @@ class add_edge_cmd : public i_command {
             return true;
         }
         bool validate_args(const std::vector<std::string> &args) override {
-            if (args.size() != 3              ||
-                !is_number(args[2])           ||
-                std::isdigit(args[0].front()) ||
-                std::isdigit(args[1].front())) { return false; }
-            return true;
+            bool broken_arguments = args.size() != 3 || !is_number(args[2]) || std::isdigit(args[0].front()) || std::isdigit(args[1].front());
+            return !broken_arguments;
         }
 };

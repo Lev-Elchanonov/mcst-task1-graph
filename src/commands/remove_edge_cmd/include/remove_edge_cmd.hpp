@@ -11,10 +11,7 @@ class remove_edge_cmd : public i_command {
         }
 
         bool validate_args(const std::vector<std::string> &args) override {
-            if (args.size() != 2              ||
-                std::isdigit(args[0].front()) ||
-                std::isdigit(args[1].front())) { return false; }
-
-            return true;
+            bool broken_arguments = args.size() != 2 || std::isdigit(args[0].front()) || std::isdigit(args[1].front());
+            return !broken_arguments;
         }
 };

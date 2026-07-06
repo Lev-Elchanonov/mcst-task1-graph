@@ -7,7 +7,6 @@ public:
         if (!validate_args(args)) {
             return "Failure: Incorrect args";
         }
-
         graph.clear();
         return "";
     }
