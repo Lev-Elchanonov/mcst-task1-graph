@@ -2,6 +2,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <climits>
 
 #include "graph.hpp"
 
@@ -19,20 +20,20 @@ class Maxflow {
         std::unordered_map<std::string, bool> visited_;
 
         void add_edge(const std::string& u, const std::string& v, size_t cap) {
-            M_edge forward{v, cap, 0, graph_[v].size()};
-            M_edge backward{u, 0, 0, graph_[u].size()};
+            M_edge forward{v, cap, 0, graph_[v].size()};// добавление прямого ребра
+            M_edge backward{u, 0, 0, graph_[u].size()}; // добавление обратного ребра
             graph_[u].push_back(forward);
             graph_[v].push_back(backward);
         }
 
         int dfs_maxflow(const std::string& current_v, int min_capacity) {
             if (current_v == dest_vertex_) {
-                return min_capacity;
+                return min_capacity;    // максимальный поток, который можно пропустить через текущий путь
             }
             visited_[current_v] = true;
-            for (auto& edge : graph_[current_v]) {
+            for (auto& edge : graph_[current_v]) { // проходимся по всем ребрам текущей вершины
                 std::string to_vertex = edge.to_;
-                int remaining = edge.capacity_ - edge.flow_;
+                int remaining = edge.capacity_ - edge.flow_; // remaining — сколько еще можно прокачать через это ребро.
 
                 if (!visited_[to_vertex] && remaining > 0) {
                     int delta = dfs_maxflow(to_vertex, std::min(min_capacity, remaining));
@@ -67,7 +68,7 @@ class Maxflow {
                     visited_[id] = false;
                 }
 
-                size_t delta = dfs_maxflow(start, INT_MAX);
+                size_t delta = dfs_maxflow(start, INT_MAX); // выполняем алгоритм пока delta != 0 (total_flow увеличивается)
                 if (delta == 0) {
                     break;
                 }

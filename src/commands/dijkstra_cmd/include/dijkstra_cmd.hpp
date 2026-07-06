@@ -1,9 +1,10 @@
 #pragma once
 #include <queue>
+#include <algorithm>
 
 #include "i_command.hpp"
 
-class dijkstra_cmd : public i_command {
+class dijkstra_cmd final : public i_command {
     public:
         std::string execute(Graph &graph, const std::vector<std::string>& args) override {
             if (!validate_args(args)) {
@@ -49,14 +50,15 @@ class dijkstra_cmd : public i_command {
                     }
                 }
             }
-            std::multimap<size_t, std::string> sorted_order; // для сортировки вершин
+            std::vector<std::pair<size_t, std::string>> results; // для сортировки вершин
             for (const auto& [id, distance] : dist) {
                 if (distance != INF && distance > 0) {
-                    sorted_order.emplace(distance, id);
+                    results.emplace_back(distance, id);
                 }
             }
+            std::sort(results.begin(), results.end());
             std::string result_answer;
-            for (const auto& [distance, id] : sorted_order) {
+            for (const auto& [distance, id] : results) {
                 result_answer += id + " " + std::to_string(distance) + "\n";
             }
             if (!result_answer.empty()) {

@@ -21,4 +21,6 @@ class Graph {
         std::string export_to_dot() const noexcept; // для визуализации графа
 
         void clear() noexcept { vertices_.clear(); } // полная очистка графа
+
+        bool has_vertex(const std::string& vert_name) const noexcept { return vertices_.contains(vert_name); }
 };

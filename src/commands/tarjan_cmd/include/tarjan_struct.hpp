@@ -21,6 +21,9 @@ class Tarjan {
         explicit Tarjan(Graph& graph) : graph_(graph) {}
 
         void strong_connect(const std::string& vertex_id) {
+            if (!graph_.has_vertex(vertex_id)) {
+                return;
+            }
             indexes_[vertex_id] = count_;
             lowlinks_[vertex_id] = count_;
             count_++;
