@@ -27,7 +27,8 @@ if gtest_dep.found()
         'tests/test_edge.cpp',
         'tests/test_maxflow.cpp',
         'tests/test_tarjan.cpp',
-        'tests/test_dijkstra.cpp'
+        'tests/test_dijkstra.cpp',
+        'tests/test_rpo.cpp'
     )
 
     test_executable = executable('tests',

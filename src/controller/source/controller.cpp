@@ -14,6 +14,7 @@
 #include "maxflow_cmd.hpp"
 #include "tarjan_cmd.hpp"
 #include "clear_cmd.hpp"
+#include "rpo_cmd.hpp"
 
 std::vector<std::string> Controller::split_tokens(std::string str) {
     std::regex reg(R"(\s+)");
@@ -34,6 +35,7 @@ void Controller::register_default_commands() {
     commands_.emplace("MAXFLOW", std::make_unique<maxflow_cmd>());
     commands_.emplace("TARJAN", std::make_unique<tarjan_cmd>());
     commands_.emplace("CLEAR", std::make_unique<clear_cmd>());
+    commands_.emplace("RPO_NUMBERING", std::make_unique<rpo_cmd>());
 }
 
 

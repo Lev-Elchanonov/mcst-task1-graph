@@ -8,7 +8,7 @@ subdir('dijkstra_cmd')
 subdir('maxflow_cmd')
 subdir('tarjan_cmd')
 subdir('clear_cmd')
-
+subdir('rpo_cmd')
 command_deps = declare_dependency(
     dependencies : [
         i_command_dep,
@@ -20,6 +20,7 @@ command_deps = declare_dependency(
         dijkstra_dep,
         maxflow_dep,
         tarjan_dep,
-        clear_dep
+        clear_dep,
+        rpo_dep
     ]
 )
