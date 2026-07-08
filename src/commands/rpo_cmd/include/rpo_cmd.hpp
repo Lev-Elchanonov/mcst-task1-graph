@@ -5,14 +5,8 @@
 #include "rpo_help_class.hpp"
 
 class rpo_cmd final : public i_command {
-private:
-    enum class Color {
-        White,
-        Gray,
-        Black
-    };
 public:
-    std::string execute(graph &graph, const std::vector<std::string>& args) override {
+    std::string execute(graph& graph, const std::vector<std::string>& args) override {
         if (!validate_args(args)) {
             return "Failure: Incorrect args";
         }

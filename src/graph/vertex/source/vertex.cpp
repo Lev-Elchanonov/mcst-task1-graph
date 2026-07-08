@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-const edge& vertex::get_outgoing_edge(const std::string &id) const{
+const edge& vertex::get_outgoing_edge(const std::string& id) const{
     if (!outgoing_edges_.contains(id)) {
         throw std::out_of_range("Vertex with id " + id + " not found\n");
     }

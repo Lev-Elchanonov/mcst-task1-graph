@@ -32,7 +32,7 @@ public:
         return res;
     }
 
-    bool validate_args(const std::vector<std::string> &args) override {
+    bool validate_args(const std::vector<std::string>& args) override {
         bool broken_arguments = args.size() != 1 || std::isdigit(args[0].front());
         return !broken_arguments;
     }

@@ -56,7 +56,7 @@ void controller::delete_command(const std::string& command) {
 
 
 
-std::string controller::process_command(const std::string &command) {
+std::string controller::process_command(const std::string& command) {
     std::vector<std::string> tokens = split_tokens(command);        // первый полученный токен - название команды, остальные - ее аргументы
     std::string command_name = tokens.front();
     tokens.erase(tokens.begin());

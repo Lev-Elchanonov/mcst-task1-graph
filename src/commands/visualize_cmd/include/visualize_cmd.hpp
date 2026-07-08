@@ -6,7 +6,7 @@
 
 class visualize_cmd final : public i_command {
 public:
-    std::string execute(graph &graph, const std::vector<std::string>& args) override {
+    std::string execute(graph& graph, const std::vector<std::string>& args) override {
         if (!validate_args(args)) {
             return "Failure: Incorrect args";
         }
@@ -40,7 +40,7 @@ public:
         return "";
     }
 
-    bool validate_args(const std::vector<std::string> &args) override {
+    bool validate_args(const std::vector<std::string>& args) override {
         return args.empty();
     }
 };

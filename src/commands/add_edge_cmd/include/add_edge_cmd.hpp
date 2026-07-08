@@ -4,7 +4,7 @@
 
 class add_edge_cmd final : public i_command {
 public:
-    std::string execute(graph &graph, const std::vector<std::string>& args) override {
+    std::string execute(graph& graph, const std::vector<std::string>& args) override {
         if (!validate_args(args)) {
             return "Failure: Incorrect args";
         }
@@ -22,7 +22,7 @@ public:
         }
         return true;
     }
-    bool validate_args(const std::vector<std::string> &args) override {
+    bool validate_args(const std::vector<std::string>& args) override {
         bool broken_arguments = args.size() != 3 || !is_number(args[2]) || std::isdigit(args[0].front()) || std::isdigit(args[1].front());
         return !broken_arguments;
     }
