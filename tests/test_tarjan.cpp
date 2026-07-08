@@ -3,13 +3,13 @@
 #include "graph.hpp"
 #include "tarjan_cmd.hpp"
 
-class Tarjan_test : public ::testing::Test {
+class tarjan_test : public ::testing::Test {
 protected:
-    Graph graph_;
+    graph graph_;
     tarjan_cmd tarjan_;
 };
 
-TEST_F(Tarjan_test, Graph_1) {
+TEST_F(tarjan_test, Graph_1) {
     graph_.add_vertex("A");
     graph_.add_vertex("B");
     graph_.add_vertex("C");
@@ -37,7 +37,7 @@ TEST_F(Tarjan_test, Graph_1) {
 }
 
 
-TEST_F(Tarjan_test, Simple_graph_2) {
+TEST_F(tarjan_test, Simple_graph_2) {
     graph_.add_vertex("A1");
     graph_.add_vertex("A2");
     graph_.add_vertex("A3");

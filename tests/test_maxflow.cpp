@@ -3,13 +3,13 @@
 #include "graph.hpp"
 #include "maxflow_cmd.hpp"
 
-class Maxflow_test : public ::testing::Test {
+class maxflow_test : public ::testing::Test {
 protected:
-    Graph graph_;
+    graph graph_;
     maxflow_cmd maxflow_;
 };
 
-TEST_F(Maxflow_test, Simple_graph_1) {
+TEST_F(maxflow_test, Simple_graph_1) {
     graph_.add_vertex("A");
     graph_.add_vertex("B");
     graph_.add_vertex("C");
@@ -32,7 +32,7 @@ TEST_F(Maxflow_test, Simple_graph_1) {
 }
 
 
-TEST_F(Maxflow_test, Simple_graph_2) {
+TEST_F(maxflow_test, Simple_graph_2) {
     graph_.add_vertex("A");
     graph_.add_vertex("B");
     graph_.add_vertex("C");
@@ -51,7 +51,7 @@ TEST_F(Maxflow_test, Simple_graph_2) {
     EXPECT_EQ(res, "90");
 }
 
-TEST_F(Maxflow_test, Large_graph_1) {
+TEST_F(maxflow_test, Large_graph_1) {
     graph_.add_vertex("A1");
     graph_.add_vertex("A2");
     graph_.add_vertex("A3");
@@ -83,7 +83,7 @@ TEST_F(Maxflow_test, Large_graph_1) {
 
 
 
-TEST_F(Maxflow_test, Large_graph_2) {
+TEST_F(maxflow_test, Large_graph_2) {
     graph_.add_vertex("A1");
     graph_.add_vertex("A2");
     graph_.add_vertex("A3");

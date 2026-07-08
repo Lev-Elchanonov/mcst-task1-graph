@@ -2,7 +2,7 @@
 #include <algorithm>
 
 #include "i_command.hpp"
-#include "rpo_struct.hpp"
+#include "rpo_help_class.hpp"
 
 class rpo_cmd final : public i_command {
 private:
@@ -12,14 +12,14 @@ private:
         Black
     };
 public:
-    std::string execute(Graph &graph, const std::vector<std::string>& args) override {
+    std::string execute(graph &graph, const std::vector<std::string>& args) override {
         if (!validate_args(args)) {
             return "Failure: Incorrect args";
         }
         if (!graph.has_vertex(args.front())) {
             return "Unknown node " + args.front();
         }
-        auto rpo_class = Rpo(graph);
+        auto rpo_class = rpo(graph);
         rpo_class.dfs(args.front());
         auto& post_order = rpo_class.get_postorder();
         std::ranges::reverse(post_order);

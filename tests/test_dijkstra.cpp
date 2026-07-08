@@ -3,13 +3,13 @@
 #include "dijkstra_cmd.hpp"
 #include "graph.hpp"
 
-class Dijkstra_test : public ::testing::Test {
-    protected:
-        Graph graph_;
-        dijkstra_cmd dijkstra_;
+class dijkstra_test : public ::testing::Test {
+protected:
+    graph graph_;
+    dijkstra_cmd dijkstra_;
 };
 
-TEST_F(Dijkstra_test, Common_graph) {
+TEST_F(dijkstra_test, Common_graph) {
     graph_.add_vertex("A");
     graph_.add_vertex("B");
     graph_.add_vertex("C");
@@ -40,7 +40,7 @@ TEST_F(Dijkstra_test, Common_graph) {
     EXPECT_EQ(res, "C 3\nD 4\nB 5\nF 100");
 }
 
-TEST_F(Dijkstra_test, Alone_vertex) {
+TEST_F(dijkstra_test, Alone_vertex) {
     graph_.add_vertex("A");
     graph_.add_vertex("B");
     graph_.add_vertex("C");

@@ -2,12 +2,12 @@
 
 #include <stdexcept>
 
-void Graph::add_vertex(const std::string& vert_name) noexcept {
-    Vertex new_vertex(vert_name);
+void graph::add_vertex(const std::string& vert_name) noexcept {
+    vertex new_vertex(vert_name);
     vertices_[vert_name] = new_vertex;
 }
 
-std::string Graph::add_edge(size_t weight, const std::string& source_id, const std::string& dest_id) noexcept {
+std::string graph::add_edge(size_t weight, const std::string& source_id, const std::string& dest_id) noexcept {
     if (!vertices_.contains(source_id) && !vertices_.contains(dest_id)) {
         return "Unknown nodes " + source_id + " " + dest_id;
     }
@@ -23,14 +23,14 @@ std::string Graph::add_edge(size_t weight, const std::string& source_id, const s
     return "";
 }
 
-const Vertex& Graph::get_vertex(const std::string& vert_name) const {
+const vertex& graph::get_vertex(const std::string& vert_name) const {
     if (!vertices_.contains(vert_name)) {
         throw std::invalid_argument("Vertex not found");
     }
     return vertices_.find(vert_name)->second;
 }
 
-const Edge& Graph::get_edge(const std::string& source_id, const std::string& dest_id) const {
+const edge& graph::get_edge(const std::string& source_id, const std::string& dest_id) const {
     if (!vertices_.contains(source_id)) {
         throw std::invalid_argument("Source vertex not found");
     }
@@ -38,7 +38,7 @@ const Edge& Graph::get_edge(const std::string& source_id, const std::string& des
     return iter->second.get_outgoing_edge(dest_id);
 }
 
-std::string Graph::delete_edge(const std::string& source_id, const std::string& dest_id) noexcept {
+std::string graph::delete_edge(const std::string& source_id, const std::string& dest_id) noexcept {
     if (!vertices_.contains(source_id) && !vertices_.contains(dest_id)) {
         return "Unknown nodes " + source_id + " " + dest_id;
     }
@@ -54,7 +54,7 @@ std::string Graph::delete_edge(const std::string& source_id, const std::string& 
 }
 
 
-std::string Graph::delete_vertex(const std::string& vert_name) noexcept {
+std::string graph::delete_vertex(const std::string& vert_name) noexcept {
     if (!vertices_.contains(vert_name)) {
         return "Unknown node " + vert_name;
     }
@@ -66,7 +66,7 @@ std::string Graph::delete_vertex(const std::string& vert_name) noexcept {
 }
 
 
-std::string Graph::export_to_dot() const noexcept {
+std::string graph::export_to_dot() const noexcept {
     std::string result = "digraph G {\n";
     result += "    rankdir=LR;\n";
     result += "    node [shape=circle];\n";

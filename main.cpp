@@ -7,8 +7,8 @@
 
 int main() {
     try {
-        auto graph = std::make_unique<Graph>();
-        auto dialogue = std::make_unique<View>((graph.get()));
+        auto graph_ = std::make_unique<graph>();
+        auto dialogue = std::make_unique<view>((graph_.get()));
         dialogue->chat();
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;

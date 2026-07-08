@@ -16,7 +16,7 @@
 #include "clear_cmd.hpp"
 #include "rpo_cmd.hpp"
 
-std::vector<std::string> Controller::split_tokens(std::string str) {
+std::vector<std::string> controller::split_tokens(std::string str) {
     std::regex reg(R"(\s+)");
     std::sregex_token_iterator iter(str.begin(), str.end(), reg, -1);
     std::sregex_token_iterator end;
@@ -25,7 +25,7 @@ std::vector<std::string> Controller::split_tokens(std::string str) {
     return tokens;
 }
 
-void Controller::register_default_commands() {
+void controller::register_default_commands() {
     commands_.emplace("NODE", std::make_unique<add_vertex_cmd>());
     commands_.emplace("EDGE", std::make_unique<add_edge_cmd>());
     commands_.emplace("REMOVE NODE", std::make_unique<remove_vertex_cmd>());
@@ -39,7 +39,7 @@ void Controller::register_default_commands() {
 }
 
 
-Controller::Controller(Graph* graph) {
+controller::controller(graph* graph) {
     if (!graph) {
         throw std::invalid_argument("Graph cannot be nullptr\n");
     }
@@ -47,16 +47,16 @@ Controller::Controller(Graph* graph) {
     register_default_commands();
 }
 
-void Controller::add_command(const std::string& command, std::unique_ptr<i_command> command_ptr) {
+void controller::add_command(const std::string& command, std::unique_ptr<i_command> command_ptr) {
     commands_.emplace(command, std::move(command_ptr));
 }
-void Controller::delete_command(const std::string& command) {
+void controller::delete_command(const std::string& command) {
     commands_.erase(command);
 }
 
 
 
-std::string Controller::process_command(const std::string &command) {
+std::string controller::process_command(const std::string &command) {
     std::vector<std::string> tokens = split_tokens(command);        // первый полученный токен - название команды, остальные - ее аргументы
     std::string command_name = tokens.front();
     tokens.erase(tokens.begin());

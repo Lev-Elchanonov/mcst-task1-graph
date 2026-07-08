@@ -2,9 +2,9 @@
 
 #include "graph.hpp"
 
-class Edge_test : public ::testing::Test {
+class edge_test : public ::testing::Test {
 protected:
-    Graph graph_;
+    graph graph_;
     void SetUp() override {
         graph_.add_vertex("A");
         graph_.add_vertex("B");
@@ -23,7 +23,7 @@ protected:
 };
 
 
-TEST_F(Edge_test, Add_edge) {
+TEST_F(edge_test, Add_edge) {
     graph_.add_vertex("T1");
     graph_.add_vertex("T2");
     EXPECT_THROW(graph_.get_edge("T1", "T2"), std::out_of_range);
@@ -50,7 +50,7 @@ TEST_F(Edge_test, Add_edge) {
     EXPECT_EQ(error_msg, "Unknown nodes NON_EXIST_1 NON_EXIST_2");
 }
 
-TEST_F(Edge_test, Remove_edge) {
+TEST_F(edge_test, Remove_edge) {
     EXPECT_NO_THROW(graph_.get_edge("A", "B"));
     graph_.delete_edge("A", "B");
     EXPECT_THROW(graph_.get_edge("A", "B"), std::out_of_range);

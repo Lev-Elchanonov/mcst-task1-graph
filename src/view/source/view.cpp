@@ -1,7 +1,7 @@
 #include "view.hpp"
 
 
-void View::chat(std::istream& istr) {
+void view::chat(std::istream& istr) {
     std::string input;
     std::string message;
     while (std::getline(istr, input)) {
