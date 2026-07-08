@@ -10,8 +10,8 @@ class maxflow {
 private:
     struct m_edge {
         std::string to_;
-        size_t capacity_;
-        size_t flow_;
+        long long capacity_;
+        long long flow_;
         size_t reverse_index_;
     };
 
@@ -19,24 +19,24 @@ private:
     std::unordered_map<std::string, std::vector<m_edge>> graph_;
     std::unordered_map<std::string, bool> visited_;
 
-    void add_edge(const std::string& u, const std::string& v, size_t cap) {
+    void add_edge(const std::string& u, const std::string& v, long long cap) {
         m_edge forward{v, cap, 0, graph_[v].size()};// добавление прямого ребра
         m_edge backward{u, 0, 0, graph_[u].size()}; // добавление обратного ребра
         graph_[u].push_back(forward);
         graph_[v].push_back(backward);
     }
 
-    int dfs_maxflow(const std::string& current_v, int min_capacity) {
+    long long dfs_maxflow(const std::string& current_v, long long min_capacity) {
         if (current_v == dest_vertex_) {
             return min_capacity;    // максимальный поток, который можно пропустить через текущий путь
         }
         visited_[current_v] = true;
         for (auto& edge : graph_[current_v]) { // проходимся по всем ребрам текущей вершины
             std::string to_vertex = edge.to_;
-            int remaining = edge.capacity_ - edge.flow_; // remaining — сколько еще можно прокачать через это ребро.
+            long long remaining = edge.capacity_ - edge.flow_; // remaining — сколько еще можно прокачать через это ребро.
 
             if (!visited_[to_vertex] && remaining > 0) {
-                int delta = dfs_maxflow(to_vertex, std::min(min_capacity, remaining));
+                long long delta = dfs_maxflow(to_vertex, std::min(min_capacity, remaining));
                 if (delta > 0) {
                     edge.flow_ += delta;
                     graph_[to_vertex][edge.reverse_index_].flow_ -= delta;

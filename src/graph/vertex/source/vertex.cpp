@@ -17,12 +17,8 @@ void vertex::add_outgoing_edge(vertex* other_vertex, size_t weight) noexcept {
     }
 
     const std::string& other_id = other_vertex->get_id();
-    if (outgoing_edges_.contains(other_id)) { // если такое ребро уже существует
-        return;
-    }
-
     edge new_edge(weight, this, other_vertex);
-    outgoing_edges_.insert({other_id, new_edge});
+    outgoing_edges_.insert_or_assign(other_id, new_edge);
 }
 
 void vertex::delete_outgoing_edge(const std::string& id) noexcept {
